@@ -1,12 +1,15 @@
 imports:
-  - php
+    - php
 
 filter:
-  excluded_paths: [vendor/*, test/*, theme/src/*]
+    excluded_paths: [vendor/*, test/*, theme/src/*]
 
 build:
-  tests:
-    command: "make phpunit"
-    coverage:
-      file: "build/coverage.clover"
-      format: "php-clover"
+
+    tests:
+        override:
+            -
+                command: "make phpunit"
+                coverage:
+                    file: "build/coverage.clover"
+                    format: "php-clover"

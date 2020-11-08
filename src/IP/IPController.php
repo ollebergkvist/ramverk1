@@ -1,6 +1,6 @@
 <?php
 
-namespace Anax\Controller;
+namespace Olbe19\IP;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;

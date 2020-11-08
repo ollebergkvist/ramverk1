@@ -1,6 +1,6 @@
 <?php
 
-namespace Anax\Controller;
+namespace Olbe19\IP;
 
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
@@ -165,7 +165,6 @@ class IPControllerTest extends TestCase
     {
         $request = $this->di->get("request");
         $request->setGet("ip", "216.58.217.36");
-        var_dump($request);
 
         $res = $this->controller->jsonActionGet();
 

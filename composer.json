@@ -5,7 +5,7 @@
     "minimum-stability": "beta",
     "prefer-stable": true,
     "autoload": {
-        "psr-4": {"Anax\\": "src/", "Olle\\": "src/"}
+        "psr-4": {"Anax\\": "src/", "Olbe19\\": "src/"}
     },
     "require": {
         "anax/anax-ramverk1-me": "^1.0.0"

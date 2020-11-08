@@ -2,7 +2,6 @@
 
 namespace Anax\Controller;
 
-use Anax\Response\ResponseUtility;
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
 
@@ -11,12 +10,9 @@ use PHPUnit\Framework\TestCase;
  */
 class IPControllerTest extends TestCase
 {
-
     // Create the di container.
     protected $di;
     protected $controller;
-
-
 
     /**
      * Prepare before each test.
@@ -44,42 +40,178 @@ class IPControllerTest extends TestCase
 
 
     /**
-     * Test the route "index".
+     * Test route indexActionGet
      */
     public function testIndexActionGet()
     {
         $res = $this->controller->indexActionGet();
-        $this->assertInstanceOf(ResponseUtility::class, $res);
-
-        // $json = $res[0];
-        // $exp = "db is active";
-        // $this->assertContains($exp, $json["message"]);
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+        $this->assertIsObject($res);
     }
 
     /**
-     * Test the route "text".
+     * Test route textActionPost with valid IPV4 adress
      */
-    public function testTextActionPost()
+    public function testTextActionPostWithValidIPV4()
     {
+        $request = $this->di->get("request");
+        $request->setPost("ip", "216.58.217.36");
+
         $res = $this->controller->textActionPost();
-        $this->assertInstanceOf(ResponseUtility::class, $res);
+
+
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
     }
 
     /**
-     * Test the route "json".
+     * Test route textActionPost with valid IPV6 adress
      */
-    public function testJsonActionPost()
+    public function testTextActionPostWithValidIPV6()
     {
+        $request = $this->di->get("request");
+        $request->setPost("ip", "2001:0db8:0000:0000:0000:ff00:0042:7879");
+
+        $res = $this->controller->textActionPost();
+
+
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
+
+    /**
+     * Test route textActionPost with invalid IP adress
+     */
+    public function testTextActionPostWithInvalidIP()
+    {
+        $request = $this->di->get("request");
+        $request->setPost("ip", "127.0");
+
+        $res = $this->controller->textActionPost();
+
+
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
+
+    /**
+     * Test route textActionPost with missing IP adress
+     */
+    public function testTextActionPostWithMissingIP()
+    {
+        $request = $this->di->get("request");
+        $request->setPost("test", "test");
+
+        $res = $this->controller->textActionPost();
+
+
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
+
+    // /**
+    //  * Test route jsonActionPost with valid IPV4
+    //  */
+    public function testJsonActionPostWithValidIPV4()
+    {
+        $request = $this->di->get("request");
+        $request->setPost("ip", "216.58.217.36");
+
         $res = $this->controller->jsonActionPost();
-        $this->assertInternalType("array", $res);
+
+        $this->assertIsArray($res);
+    }
+
+    // /**
+    //  * Test route jsonActionPost with valid IPV6
+    //  */
+    public function testJsonActionPostWithValidIPV6()
+    {
+        $request = $this->di->get("request");
+        $request->setPost("ip", "2001:0db8:0000:0000:0000:ff00:0042:7879");
+
+        $res = $this->controller->jsonActionPost();
+
+        $this->assertIsArray($res);
+    }
+
+    // /**
+    //  * Test route jsonActionPost with invalid IP
+    //  */
+    public function testJsonActionPostWithInvalidIP()
+    {
+        $request = $this->di->get("request");
+        $request->setPost("ip", "127.0");
+
+        $res = $this->controller->jsonActionPost();
+
+        $this->assertIsArray($res);
     }
 
     /**
-     * Test the route "json".
+     * Test route textActionPost with missing IP
      */
-    public function testJsonActionGet()
+    public function testJsonActionPostWithMissingIP()
     {
+        $request = $this->di->get("request");
+        $request->setPost("test", "test");
+
+        $res = $this->controller->jsonActionPost();
+
+
+        $this->assertIsArray($res);
+    }
+
+    /**
+     * Test the route jsonActionGet with valid IPV4
+     */
+    public function testJsonActionGetWithValidIPV4()
+    {
+        $request = $this->di->get("request");
+        $request->setGet("ip", "216.58.217.36");
+        var_dump($request);
+
         $res = $this->controller->jsonActionGet();
-        $this->assertInternalType("array", $res);
+
+        $this->assertIsArray($res);
+        // $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
+
+    /**
+     * Test the route jsonActionGet with valid IPV6
+     */
+    public function testJsonActionGetWithValidIPV6()
+    {
+        $request = $this->di->get("request");
+        $request->setGet("ip", "2001:0db8:0000:0000:0000:ff00:0042:7879");
+
+        $res = $this->controller->jsonActionGet();
+
+        $this->assertIsArray($res);
+        // $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
+
+    /**
+     * Test the route jsonActionGet
+     */
+    public function testJsonActionGetwithInvalidIP()
+    {
+        $request = $this->di->get("request");
+        $request->setGet("216.58");
+
+        $res = $this->controller->jsonActionGet();
+
+        $this->assertIsArray($res);
+        // $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
+
+    /**
+     * Test the route jsonActionGet
+     */
+    public function testJsonActionGetWithMissingIP()
+    {
+        $request = $this->di->get("request");
+        $request->setGet("test", "tests");
+
+        $res = $this->controller->jsonActionGet();
+
+        $this->assertIsArray($res);
+        // $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
     }
 }

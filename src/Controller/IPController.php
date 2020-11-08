@@ -27,35 +27,35 @@ class IPController implements ContainerInjectableInterface
      */
     private $db = "not active";
 
-    /**
-     * This is how a general helper method can be created in the controller.
-     *
-     * @param string $method as the method that handled controller action.
-     *
-     * @param array $args as an array of arguments.
-     *
-     * @return string as a message to output to help understand how the controller method works.
-     *
-     */
+    // /**
+    //  * This is how a general helper method can be created in the controller.
+    //  *
+    //  * @param string $method as the method that handled controller action.
+    //  *
+    //  * @param array $args as an array of arguments.
+    //  *
+    //  * @return string as a message to output to help understand how the controller method works.
+    //  *
+    //  */
 
-    public function getDetailsOnRequest(string $method, array $args = []): string
-    {
-        $request = $this->di->get("request");
-        $path = $request->getRoute();
-        $httpMethod = $request->getMethod();
-        $numArgs = count($args);
-        $strArgs = implode(", ", $args);
-        $queryString = http_build_query($request->getGet(), '', ',');
+    // public function getDetailsOnRequest(string $method, array $args = []): string
+    // {
+    //     $request = $this->di->get("request");
+    //     $path = $request->getRoute();
+    //     $httpMethod = $request->getMethod();
+    //     $numArgs = count($args);
+    //     $strArgs = implode(", ", $args);
+    //     $queryString = http_build_query($request->getGet(), '', ',');
 
-        return <<<EOD
-            <h1>$method</h1>
+    //     return <<<EOD
+    //         <h1>$method</h1>
 
-            <p>THe request was '$path' ($httpMethod)</p>
-            <p>Got '$numArgs' arguments: '$strArgs'</p>
-            <p>Query string contains: '$queryString'</p>
-            <p>\$db is '{$this->db}'.
-        EOD;
-    }
+    //         <p>THe request was '$path' ($httpMethod)</p>
+    //         <p>Got '$numArgs' arguments: '$strArgs'</p>
+    //         <p>Query string contains: '$queryString'</p>
+    //         <p>\$db is '{$this->db}'.
+    //     EOD;
+    // }
 
 
     /**
@@ -86,35 +86,8 @@ class IPController implements ContainerInjectableInterface
 
         return $page->render([
             "title" => "IP Validator",
-            "baseTitle" => ""
         ]);
     }
-
-    // /**
-    //  * This is the index method action, it handles:
-    //  * POST METHOD mountpoint
-    //  * POST METHOD mountpoint/
-    //  * POST METHOD mountpoint/index
-    //  *
-    //  * @return array
-    //  */
-    // public function indexActionPost(): array
-    // {
-    //     // Retrieve body as JSON
-    //     try {
-    //         $body = $this->di->request->getBodyAsJson();
-    //     } catch (\Exception $e) {
-    //         $body = "Body is missing";
-    //     }
-
-    //     // Deal with the action and return a response.
-    //     $json = [
-    //         "message" => __METHOD__ . ", \$db is {$this->db}",
-    //         "body" => $body
-    //     ];
-
-    //     return [$json];
-    // }
 
     /**
      * This is the text method action, it handles:
@@ -130,11 +103,10 @@ class IPController implements ContainerInjectableInterface
         $request = $this->di->get("request");
         $page = $this->di->get("page");
 
-        // Check body
-        try {
-            $ipadress = $request->getPost("ip");
-        } catch (\Exception $e) {
-            $ipadress = "IP is missing";
+        $ipadress = $request->getPost("ip");
+
+        if (empty($ipadress)) {
+            $ipadress = "IP is missing in request";
         }
 
         // Validate IP adress
@@ -146,7 +118,7 @@ class IPController implements ContainerInjectableInterface
             $hostname = gethostbyaddr($ipadress);
         } else {
             $message = "is not a valid IP address";
-            $hostname = "No domain connect to given ip";
+            $hostname = "No domain connected to given ip";
         }
 
         // Store values in data array
@@ -178,11 +150,10 @@ class IPController implements ContainerInjectableInterface
         // Init framework
         $request = $this->di->get("request");
 
-        // Check get
-        try {
-            $ipadress = $request->getPost("ip");
-        } catch (\Exception $e) {
-            $ipadress = "IP is missing";
+        $ipadress = $request->getPost("ip");
+
+        if (empty($ipadress)) {
+            $ipadress = "IP is missing in request";
         }
 
         // Validate IP adress
@@ -194,7 +165,7 @@ class IPController implements ContainerInjectableInterface
             $hostname = gethostbyaddr($ipadress);
         } else {
             $message = "is not a valid IP address";
-            $hostname = "No domain connect to given ip";
+            $hostname = "No domain connected to given ip";
         }
 
         // Store values in data array
@@ -226,11 +197,10 @@ class IPController implements ContainerInjectableInterface
         // Init framework
         $request = $this->di->get("request");
 
-        // Check get
-        try {
-            $ipadress = $request->getGet("ip");
-        } catch (\Exception $e) {
-            $ipadress = "IP is missing";
+        $ipadress = $request->getGet("ip");
+
+        if (empty($ipadress)) {
+            $ipadress = "IP is missing in request";
         }
 
         // Validate IP adress
@@ -242,7 +212,7 @@ class IPController implements ContainerInjectableInterface
             $hostname = gethostbyaddr($ipadress);
         } else {
             $message = "is not a valid IP address";
-            $hostname = "No domain connect to given ip";
+            $hostname = "No domain connected to given ip";
         }
 
         // Store values in data array
@@ -261,31 +231,31 @@ class IPController implements ContainerInjectableInterface
         return [$json];
     }
 
-    /**
-     * Adding an optional catchAll() method will catch all actions sent to the
-     * router. You can then reply with an actual response or return void to
-     * allow for the router to move on to next handler.
-     * A catchAll() handles the following, if a specific action method is not
-     * created:
-     * ANY METHOD mountpoint/**
-     *
-     * @param array $args as a variadic parameter.
-     *
-     * @return mixed
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function catchAll(...$args)
-    {
+    // /**
+    //  * Adding an optional catchAll() method will catch all actions sent to the
+    //  * router. You can then reply with an actual response or return void to
+    //  * allow for the router to move on to next handler.
+    //  * A catchAll() handles the following, if a specific action method is not
+    //  * created:
+    //  * ANY METHOD mountpoint/**
+    //  *
+    //  * @param array $args as a variadic parameter.
+    //  *
+    //  * @return mixed
+    //  *
+    //  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+    //  */
+    // public function catchAll(...$args)
+    // {
 
-        $page = $this->di->get(("page"));
-        $data = [
-            "content" => $this->getDetailsOnRequest(__METHOD__, $args),
-        ];
-        $page->add("anax/v2/article/default", $data);
+    //     $page = $this->di->get(("page"));
+    //     $data = [
+    //         "content" => $this->getDetailsOnRequest(__METHOD__, $args),
+    //     ];
+    //     $page->add("anax/v2/article/default", $data);
 
-        // Deal with the request and send an actual response, or not.
-        //return __METHOD__ . ", \$db is {$this->db}, got '" . count($args) . "' arguments: " . implode(", ", $args);
-        return [$data, 400];
-    }
+    //     // Deal with the request and send an actual response, or not.
+    //     //return __METHOD__ . ", \$db is {$this->db}, got '" . count($args) . "' arguments: " . implode(", ", $args);
+    //     return [$data, 400];
+    // }
 }

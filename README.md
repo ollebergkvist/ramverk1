@@ -4,15 +4,14 @@
 
 ## Requirements
 
-You'll need:
-
+```
 PHP 7.4 or newer version
 
 composer
 
 git
 
-You might want to have:
+Not needed but recommended:
 
 A webserver with PHP enabled.
 
@@ -21,6 +20,7 @@ make
 node and npm to work with the theme/.
 
 Docker and docker-compose to run in containers.
+```
 
 ## Clone repo
 

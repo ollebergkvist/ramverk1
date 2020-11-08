@@ -5,7 +5,6 @@ filter:
     excluded_paths: [vendor/*, test/*, theme/src/*]
 
 build:
-
     tests:
         override:
             -

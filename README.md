@@ -15,6 +15,7 @@ git
 You might want to have:
 
 A webserver with PHP enabled.
+
 make
 
 node and npm to work with the theme/.

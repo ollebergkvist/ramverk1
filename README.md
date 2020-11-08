@@ -1,6 +1,9 @@
 # ramverk1
 
 [![Build Status](https://travis-ci.com/ollebergkvist/ramverk1.svg?branch=main)](https://travis-ci.com/ollebergkvist/ramverk1)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ollebergkvist/ramverk1/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/ollebergkvist/ramverk1/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/ollebergkvist/ramverk1/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/ollebergkvist/ramverk1/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/ollebergkvist/ramverk1/badges/build.png?b=main)](https://scrutinizer-ci.com/g/ollebergkvist/ramverk1/build-status/main)
 
 ## Requirements
 

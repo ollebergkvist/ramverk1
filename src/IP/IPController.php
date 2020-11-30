@@ -203,7 +203,7 @@ class IPController implements ContainerInjectableInterface
             $ipadress = "IP is missing in request";
         }
 
-        // Validate IP adress
+        // Validate IP address
         if (filter_var($ipadress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             $message = "is a valid IPv6 address";
             $hostname = gethostbyaddr($ipadress);

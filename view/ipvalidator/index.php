@@ -41,13 +41,13 @@ namespace Anax\View;
 </p>
 <p>
     <code>
-        [
+    [
         {
         "ip": "127.0.0.1",
         "message": "is a valid IPv4 address",
         "hostname": "me.linux.se"
         }
-        ]
+    ]
     </code>
 </p>
 
@@ -55,7 +55,7 @@ namespace Anax\View;
 <h3>Test routes</h3>
 <ul>
     <li>
-        <a href="<?= url("ip/json?ip=127.0.0.1") ?>">Valid IPv4 adress</a>
+        <a href="<?= url("ip/json?ip=127.0.0.1") ?>">Valid IPv4 address</a>
     </li>
     <li>
         <a href="<?= url("ip/json?ip=2001:0db8:0000:0000:0000:ff00:0042:7879") ?>">Valid IPv6 adress</a>

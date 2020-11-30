@@ -39,5 +39,15 @@ return [
             "url" => "ip",
             "title" => "IP Validator.",
         ],
+        [
+            "text" => "Geo Tag",
+            "url" => "geo",
+            "title" => "Geo Tag.",
+        ],
+        [
+            "text" => "API",
+            "url" => "api",
+            "title" => "API.",
+        ],
     ],
 ];

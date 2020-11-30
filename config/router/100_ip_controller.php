@@ -8,7 +8,7 @@ return [
         [
             "info" => "IP Controller.",
             "mount" => "ip",
-            "handler" => "\Anax\Controller\IPController",
+            "handler" => "\Olbe19\IP\IPController",
         ],
     ]
 ];

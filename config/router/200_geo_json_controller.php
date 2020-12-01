@@ -8,7 +8,7 @@ return [
         [
             "info" => "Geo Json Controller.",
             "mount" => "geo-json",
-            "handler" => "\Olbe19\Geo\GeoJsonController",
+            "handler" => "\Olbe19\Geo\Controllers\GeoJsonController",
         ],
     ]
 ];

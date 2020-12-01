@@ -1,16 +1,19 @@
 <?php
 
-namespace Olbe19\Geo;
+/**
+ * Geo controller
+ */
+
+namespace Olbe19\Geo\Controllers;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
 /**
- * Controller for geo tagging ip address
+ * Controller for geo tagging API
  *
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class GeoController implements ContainerInjectableInterface
+class GeoJsonController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -32,18 +35,13 @@ class GeoController implements ContainerInjectableInterface
     }
 
     /**
-     * This is the index method action, it handles:
-     * GET METHOD mountpoint
+     * Index route
      *
      * @return array
      */
-    public function indexActionGet(): object
+    public function indexActionGet() : array
     {
-        $page = $this->di->get("page");
-        $title = "Geotag IP-address";
         $request = $this->di->get("request");
-        $config = require ANAX_INSTALL_PATH . "/config/config.php";
-        $googleAPIKey = $config["google"] ?? null;
         $ip = $request->getGet("ip");
 
         if (empty($ip)) {
@@ -54,6 +52,18 @@ class GeoController implements ContainerInjectableInterface
         // Validate IP
         $ipValidator = new IPValidator();
         $isValidIP = $ipValidator->isIPValid($ip);
+
+        if ($isValidIP == false) {
+            $data = [
+                "ip" => $ip ?? null,
+                "isValidIP" => $isValidIP ?? null,
+            ];
+
+            $json = [$data];
+
+            return [$json];
+        }
+
         $ipProtocol = $ipValidator->getIPProtocol($ip);
         $ipHost = $ipValidator->getIPHost($ip);
 
@@ -62,9 +72,12 @@ class GeoController implements ContainerInjectableInterface
         $ipGeoPosition->setUrl($ip);
         $ipGeoPositionResult = $ipGeoPosition->getData();
 
+        // Get map
+        $map = new GoogleMaps();
+        $urlMap = $map->getMap($ipGeoPositionResult["longitude"], $ipGeoPositionResult["latitude"]);
+
         $data = [
-            "googleAPIKey" => $googleAPIKey,
-            "ip" => $ip ?? "null",
+            "ip" => $ip ?? null,
             "isValidIP" => $isValidIP ?? null,
             "ipProtocol" => $ipProtocol ?? null,
             "ipHost" => $ipHost ?? null,
@@ -72,12 +85,11 @@ class GeoController implements ContainerInjectableInterface
             "longitude" => $ipGeoPositionResult["longitude"] ?? null,
             "country" => $ipGeoPositionResult["country"] ?? null,
             "city" => $ipGeoPositionResult["city"] ?? null,
+            "urlMap" => $urlMap ?? null,
         ];
 
-        $page->add("geo/index", $data);
+        $json = [$data];
 
-        return $page->render([
-            "title" => $title,
-        ]);
+        return [$json];
     }
 }

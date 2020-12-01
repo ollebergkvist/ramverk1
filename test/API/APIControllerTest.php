@@ -1,21 +1,18 @@
 <?php
 
-namespace Anax\Controller;
+namespace Olbe19\API;
 
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test the FlatFileContentController.
+ * Test the SampleController.
  */
-class FlatFileContentControllerTest extends TestCase
+class APIControllerTest extends TestCase
 {
-    
     // Create the di container.
     protected $di;
     protected $controller;
-
-
 
     /**
      * Prepare before each test.
@@ -35,23 +32,18 @@ class FlatFileContentControllerTest extends TestCase
         $di = $this->di;
 
         // Setup the controller
-        $this->controller = new FlatFileContentController();
+        $this->controller = new APIController();
         $this->controller->setDI($this->di);
-        //$this->controller->initialize();
+        $this->controller->initialize();
     }
 
-
-
     /**
-     * Test the route "index".
+     * Test route indexActionGet
      */
-    public function testIndexAction()
+    public function testIndexActionGet()
     {
-        $res = $this->controller->catchAll();
-        $this->assertInstanceOf("\Anax\Response\Response", $res);
-
-        $body = $res->getBody();
-        $exp = "| ramverk1</title>";
-        $this->assertContains($exp, $body);
+        $res = $this->controller->indexActionGet();
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+        $this->assertIsObject($res);
     }
 }

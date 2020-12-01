@@ -23,6 +23,23 @@ class APIController implements ContainerInjectableInterface
     use ContainerInjectableTrait;
 
     /**
+     * @var string $db a sample member variable that gets initialised
+     */
+    private $db = "not active";
+
+    /**
+     * The initialize method is optional and will always be called before the
+     * target method/action. This is a convenient method where you could
+     * setup internal properties that are commonly used by several methods.
+     *
+     * @return void
+     */
+    public function initialize(): void
+    {
+        $this->db = "active";
+    }
+
+    /**
      * This is the index method action, it handles:
      * GET METHOD mountpoint
      * GET METHOD mountpoint/

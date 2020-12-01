@@ -37,9 +37,9 @@ class GeoControllerTest extends TestCase
 
         // Set local server address
         $_SERVER["REMOTE_ADDR"] = "127.0.0.1";
-        
+
         $this->controller->setDI($di);
-        // $this->controller->initialize();
+        $this->controller->initialize();
     }
 
     /**
@@ -62,7 +62,7 @@ class GeoControllerTest extends TestCase
         $request = $di->get("request");
         $request->setGet("ip", "187.178.82.197");
         $res = $this->controller->indexActionGet();
-        
+
         $this->assertIsObject($res);
         $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
     }

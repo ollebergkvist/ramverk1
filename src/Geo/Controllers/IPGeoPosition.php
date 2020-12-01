@@ -4,7 +4,7 @@
  * IP geo position model
  */
 
-namespace Olbe19\Geo\Models;
+namespace Olbe19\Geo\Controllers;
 
 /**
  * Get IP data from IPstack
@@ -37,16 +37,16 @@ class IPGeoPosition
     /**
      * Set url
      *
-     * @var string $ip          IP address to look up
+     * @var string $ipAddress          IP address to look up
      * @var string $baseUrl     API base URL
      * @var string $apiKey      API key for Ipstack usage
      * @var string $url         Complete url to curl
      *
      * @return void.
      */
-    public function setUrl($ip)
+    public function setUrl($ipAddress)
     {
-        $this->url = $this->baseUrl . $ip . "?access_key=" . $this->apiKey;
+        $this->url = $this->baseUrl . $ipAddress . "?access_key=" . $this->apiKey;
     }
 
     /**

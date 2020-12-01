@@ -4,7 +4,7 @@
  * Curl model
  */
 
-namespace Olbe19\Geo\Models;
+namespace Olbe19\Geo\Controllers;
 
 /**
  * Get data from API
@@ -20,15 +20,15 @@ class Curl
      * @return array $res Result as JSON
      */
 
-    public function getData(String $url) : array
+    public function getData(String $url)
     {
-        $ch = curl_init($url);
+        $curlHandler = curl_init($url);
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, 1);
 
-        $res = curl_exec($ch);
+        $res = curl_exec($curlHandler);
 
-        curl_close($ch);
+        curl_close($curlHandler);
 
         $res = json_decode($res, true);
 

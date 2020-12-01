@@ -4,7 +4,7 @@
  * Google Maps model
  */
 
-namespace Olbe19\Geo\Models;
+namespace Olbe19\Geo\Controllers;
 
 /**
  * Get link to Google Maps from IP

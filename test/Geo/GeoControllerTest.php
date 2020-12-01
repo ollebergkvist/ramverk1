@@ -2,7 +2,7 @@
 
 namespace Olbe19\Geo\Controllers;
 
-use Anax\DI\DIFactoryConfig;
+use Anax\DI\DIMagic;
 use Anax\Response\ResponseUtility;
 use PHPUnit\Framework\TestCase;
 
@@ -23,7 +23,7 @@ class GeoControllerTest extends TestCase
         global $di;
 
         // Setup di
-        $this->di = new DIFactoryConfig();
+        $this->di = new DIMagic();
         $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
 
         // Use a different cache dir for unit test
@@ -34,8 +34,12 @@ class GeoControllerTest extends TestCase
 
         // Setup the controller
         $this->controller = new GeoController();
-        $this->controller->setDI($this->di);
-        $this->controller->initialize();
+
+        // Set local server address
+        $_SERVER["REMOTE_ADDR"] = "127.0.0.1";
+        
+        $this->controller->setDI($di);
+        // $this->controller->initialize();
     }
 
     /**
@@ -44,21 +48,22 @@ class GeoControllerTest extends TestCase
     public function testIndexActionGet()
     {
         $res = $this->controller->indexActionGet();
-        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+
         $this->assertIsObject($res);
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
     }
 
     /**
-     * Test route textActionPost with valid IPV4 adress
+     * Test indexActionGet has request
      */
-    // public function testTextActionPostWithValidIPV4()
-    // {
-    //     $request = $this->di->get("request");
-    //     $request->setPost("ip", "216.58.217.36");
-
-    //     $res = $this->controller->textActionPost();
-
-
-    //     $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
-    // }
+    public function testIndexActionGetRequest()
+    {
+        global $di;
+        $request = $di->get("request");
+        $request->setGet("ip", "187.178.82.197");
+        $res = $this->controller->indexActionGet();
+        
+        $this->assertIsObject($res);
+        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    }
 }

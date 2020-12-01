@@ -42,20 +42,20 @@ class GeoJsonController implements ContainerInjectableInterface
     public function indexActionGet() : array
     {
         $request = $this->di->get("request");
-        $ip = $request->getGet("ip");
+        $ipAddress = $request->getGet("ip");
 
-        if (empty($ip)) {
+        if (empty($ipAddress)) {
             $userIP = new GetUserIP();
-            $ip = $userIP->getIP($request);
+            $ipAddress = $userIP->getIP($request);
         }
 
         // Validate IP
         $ipValidator = new IPValidator();
-        $isValidIP = $ipValidator->isIPValid($ip);
+        $isValidIP = $ipValidator->isIPValid($ipAddress);
 
         if ($isValidIP == false) {
             $data = [
-                "ip" => $ip ?? null,
+                "ip" => $ipAddress ?? null,
                 "isValidIP" => $isValidIP ?? null,
             ];
 
@@ -64,12 +64,12 @@ class GeoJsonController implements ContainerInjectableInterface
             return [$json];
         }
 
-        $ipProtocol = $ipValidator->getIPProtocol($ip);
-        $ipHost = $ipValidator->getIPHost($ip);
+        $ipProtocol = $ipValidator->getIPProtocol($ipAddress);
+        $ipHost = $ipValidator->getIPHost($ipAddress);
 
         // Get IP position
         $ipGeoPosition = new IPGeoPosition();
-        $ipGeoPosition->setUrl($ip);
+        $ipGeoPosition->setUrl($ipAddress);
         $ipGeoPositionResult = $ipGeoPosition->getData();
 
         // Get map
@@ -77,7 +77,7 @@ class GeoJsonController implements ContainerInjectableInterface
         $urlMap = $map->getMap($ipGeoPositionResult["longitude"], $ipGeoPositionResult["latitude"]);
 
         $data = [
-            "ip" => $ip ?? null,
+            "ip" => $ipAddress ?? null,
             "isValidIP" => $isValidIP ?? null,
             "ipProtocol" => $ipProtocol ?? null,
             "ipHost" => $ipHost ?? null,

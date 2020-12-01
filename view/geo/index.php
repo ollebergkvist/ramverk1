@@ -19,57 +19,57 @@ namespace Anax\View;
 <h3>Result for IP: <?= $ip ?> </h3>
 <div>
     <span>Validation:</span>
-    <?php if ($isValidIP): ?>
+    <?php if ($isValidIP) : ?>
         <span>Valid IP</span>
     <?php else : ?>
         <span>Invalid IP</span>
     <?php endif; ?>
-    
-    <?php if ($ipProtocol): ?>
+
+    <?php if ($ipProtocol) : ?>
         <div>
             <span>IP protocol:</span>
             <span><?= $ipProtocol ?></span>
         </div>
     <?php endif; ?>
 
-    <?php if ($ipHost): ?>
+    <?php if ($ipHost) : ?>
         <div>
             <span>Host:</span>
             <span><?= $ipHost ?></span>
         </div>
     <?php endif; ?>
 
-    <?php if ($latitude): ?>
+    <?php if ($latitude) : ?>
         <div>
             <span>Latitude:</span>
             <span><?= $latitude ?></span>
         </div>
     <?php endif; ?>
 
-    <?php if ($longitude): ?>
+    <?php if ($longitude) : ?>
         <div>
             <span>Longitude:</span>
             <span><?= $longitude ?></span>
         </div>
     <?php endif; ?>
 
-    <?php if ($city): ?>
+    <?php if ($city) : ?>
         <div>
             <span>City:</span>
             <span><?= $city ?></span>
         </div>
     <?php endif; ?>
 
-    <?php if ($country): ?>
+    <?php if ($country) : ?>
         <div>
             <span>Country:</span>
             <span><?= $country ?></span>
         </div>
     <?php endif; ?>
 
-    <?php if ($latitude && $longitude ) : ?>
+    <?php if ($latitude && $longitude) : ?>
         <h3>Map</h3>
-        <div id="map" style="height: 500px"></div> 
+        <div id="map" style="height: 500px"></div>
         <script  src="https://maps.googleapis.com/maps/api/js?key=<?= $googleAPIKey ?>&callback=initMap&libraries=&v=weekly" defer></script>
         <script>
         // Initialize and add the map
@@ -90,5 +90,3 @@ namespace Anax\View;
         </script>
     <?php endif; ?>
 </div>
-
-

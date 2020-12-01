@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Test the IPController.
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class IPControllerTest extends TestCase
 {

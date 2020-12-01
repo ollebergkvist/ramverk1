@@ -4,9 +4,7 @@ namespace Olbe19\Geo\Controllers;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Olbe19\Geo\Models\GetUserIP;
-use Olbe19\Geo\Models\IPValidator;
-use Olbe19\Geo\Models\IPGeoPosition;
+
 // include('../Models/GetUserIP.php');
 
 /**
@@ -48,27 +46,27 @@ class GeoController implements ContainerInjectableInterface
         $request = $this->di->get("request");
         $config = require ANAX_INSTALL_PATH . "/config/config.php";
         $googleAPIKey = $config["google"] ?? null;
-        $ip = $request->getGet("ip");
+        $ipAddress = $request->getGet("ip");
 
-        if (empty($ip)) {
+        if (empty($ipAddress)) {
             $userIP = new GetUserIP();
-            $ip = $userIP->getIP($request);
+            $ipAddress = $userIP->getIP($request);
         }
 
         // Validate IP
         $ipValidator = new IPValidator();
-        $isValidIP = $ipValidator->isIPValid($ip);
-        $ipProtocol = $ipValidator->getIPProtocol($ip);
-        $ipHost = $ipValidator->getIPHost($ip);
+        $isValidIP = $ipValidator->isIPValid($ipAddress);
+        $ipProtocol = $ipValidator->getIPProtocol($ipAddress);
+        $ipHost = $ipValidator->getIPHost($ipAddress);
 
         // Get IP position
         $ipGeoPosition = new IPGeoPosition();
-        $ipGeoPosition->setUrl($ip);
+        $ipGeoPosition->setUrl($ipAddress);
         $ipGeoPositionResult = $ipGeoPosition->getData();
 
         $data = [
             "googleAPIKey" => $googleAPIKey ?? null,
-            "ip" => $ip ?? null,
+            "ip" => $ipAddress ?? null,
             "isValidIP" => $isValidIP ?? null,
             "ipProtocol" => $ipProtocol ?? null,
             "ipHost" => $ipHost ?? null,

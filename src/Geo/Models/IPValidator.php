@@ -37,14 +37,13 @@ class IPValidator
      */
     public function getIPProtocol(string $ip) : string
     {
-        $message = "";
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             return $message = "IPv4";
         } 
         else if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             return $message = "IPv6";
         }
-        return null;
+        return $message = "";
     }
 
     /**
@@ -59,6 +58,6 @@ class IPValidator
             $hostname = gethostbyaddr($ip);
             return $hostname;
         }
-        return null;
+        return $hostname = "";
     }
 }

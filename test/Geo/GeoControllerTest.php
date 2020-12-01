@@ -51,14 +51,14 @@ class GeoControllerTest extends TestCase
     /**
      * Test route textActionPost with valid IPV4 adress
      */
-    public function testTextActionPostWithValidIPV4()
-    {
-        $request = $this->di->get("request");
-        $request->setPost("ip", "216.58.217.36");
+    // public function testTextActionPostWithValidIPV4()
+    // {
+    //     $request = $this->di->get("request");
+    //     $request->setPost("ip", "216.58.217.36");
 
-        $res = $this->controller->textActionPost();
+    //     $res = $this->controller->textActionPost();
 
 
-        $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
-    }
+    //     $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
+    // }
 }

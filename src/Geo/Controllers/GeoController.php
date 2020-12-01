@@ -67,8 +67,8 @@ class GeoController implements ContainerInjectableInterface
         $ipGeoPositionResult = $ipGeoPosition->getData();
 
         $data = [
-            "googleAPIKey" => $googleAPIKey,
-            "ip" => $ip ?? "null",
+            "googleAPIKey" => $googleAPIKey ?? null,
+            "ip" => $ip ?? null,
             "isValidIP" => $isValidIP ?? null,
             "ipProtocol" => $ipProtocol ?? null,
             "ipHost" => $ipHost ?? null,

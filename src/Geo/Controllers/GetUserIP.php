@@ -13,9 +13,9 @@ namespace Olbe19\Geo\Controllers;
 class GetUserIP
 {
     /**
-     * Returns user's current IP address
+     * Returns user IP address
      *
-     * @return string $currentIP User's IP address
+     * @return string $ipAddress User IP address
      */
 
     public function getIP()
@@ -28,10 +28,6 @@ class GetUserIP
             $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } else if (isset($_SERVER['HTTP_X_FORWARDED'])) {
             $ipAddress = $_SERVER['HTTP_X_FORWARDED'];
-        } else if (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
-            $ipAddress = $_SERVER['HTTP_FORWARDED_FOR'];
-        } else if (isset($_SERVER['HTTP_FORWARDED'])) {
-            $ipAddress = $_SERVER['HTTP_FORWARDED'];
         } else if (isset($_SERVER['REMOTE_ADDR'])) {
             $ipAddress = $_SERVER['REMOTE_ADDR'];
         } else {

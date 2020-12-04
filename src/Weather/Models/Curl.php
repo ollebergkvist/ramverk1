@@ -4,7 +4,7 @@
  * Curl model
  */
 
-namespace Olbe19\Geo\Controllers;
+namespace Olbe19\Weather\Models;
 
 /**
  * Get data from API
@@ -42,8 +42,6 @@ class Curl
 
     public function getDataMultiCurl(array $urls) : array
     {
-        $url = "https://rem.dbwebb.se/api/users";
-
         $options = [
             CURLOPT_RETURNTRANSFER => true,
         ];
@@ -52,8 +50,9 @@ class Curl
         // Initiate the multi curl handler
         $multiHandler = curl_multi_init();
         $curlHandlerAll = [];
+
         foreach ($urls as $url) {
-            $curlHandler = curl_init("$url/$url");
+            $curlHandler = curl_init($url);
             curl_setopt_array($curlHandler, $options);
             curl_multi_add_handle($multiHandler, $curlHandler);
             $curlHandlerAll[] = $curlHandler;

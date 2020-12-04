@@ -61,6 +61,11 @@ return [
             "title" => "Geo Tag.",
         ],
         [
+            "text" => "Weather",
+            "url" => "weather",
+            "title" => "Weather.",
+        ],
+        [
             "text" => "API",
             "url" => "api",
             "title" => "API.",

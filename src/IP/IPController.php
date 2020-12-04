@@ -27,37 +27,6 @@ class IPController implements ContainerInjectableInterface
      */
     private $db = "not active";
 
-    // /**
-    //  * This is how a general helper method can be created in the controller.
-    //  *
-    //  * @param string $method as the method that handled controller action.
-    //  *
-    //  * @param array $args as an array of arguments.
-    //  *
-    //  * @return string as a message to output to help understand how the controller method works.
-    //  *
-    //  */
-
-    // public function getDetailsOnRequest(string $method, array $args = []): string
-    // {
-    //     $request = $this->di->get("request");
-    //     $path = $request->getRoute();
-    //     $httpMethod = $request->getMethod();
-    //     $numArgs = count($args);
-    //     $strArgs = implode(", ", $args);
-    //     $queryString = http_build_query($request->getGet(), '', ',');
-
-    //     return <<<EOD
-    //         <h1>$method</h1>
-
-    //         <p>THe request was '$path' ($httpMethod)</p>
-    //         <p>Got '$numArgs' arguments: '$strArgs'</p>
-    //         <p>Query string contains: '$queryString'</p>
-    //         <p>\$db is '{$this->db}'.
-    //     EOD;
-    // }
-
-
     /**
      * The initialize method is optional and will always be called before the
      * target method/action. This is a convienient method where you could
@@ -230,32 +199,4 @@ class IPController implements ContainerInjectableInterface
         // Return json
         return [$json];
     }
-
-    // /**
-    //  * Adding an optional catchAll() method will catch all actions sent to the
-    //  * router. You can then reply with an actual response or return void to
-    //  * allow for the router to move on to next handler.
-    //  * A catchAll() handles the following, if a specific action method is not
-    //  * created:
-    //  * ANY METHOD mountpoint/**
-    //  *
-    //  * @param array $args as a variadic parameter.
-    //  *
-    //  * @return mixed
-    //  *
-    //  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-    //  */
-    // public function catchAll(...$args)
-    // {
-
-    //     $page = $this->di->get(("page"));
-    //     $data = [
-    //         "content" => $this->getDetailsOnRequest(__METHOD__, $args),
-    //     ];
-    //     $page->add("anax/v2/article/default", $data);
-
-    //     // Deal with the request and send an actual response, or not.
-    //     //return __METHOD__ . ", \$db is {$this->db}, got '" . count($args) . "' arguments: " . implode(", ", $args);
-    //     return [$data, 400];
-    // }
 }

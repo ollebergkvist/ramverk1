@@ -4,7 +4,7 @@
  * IP geo position model
  */
 
-namespace Olbe19\Geo\Controllers;
+namespace Olbe19\Weather\Models;
 
 /**
  * Get IP data from IPstack
@@ -29,9 +29,36 @@ class IPGeoPosition
     {
         $this->curl = new Curl();
         $this->baseUrl = "http://api.ipstack.com/";
+    }
 
-        $config = require ANAX_INSTALL_PATH . "/config/config.php";
-        $this->apiKey = $config["ipstack"] ?? null;
+    /**
+     * Set api key
+     *
+     * @var string $ipAddress          IP address to look up
+     * @var string $baseUrl     API base URL
+     * @var string $apiKey      API key for Ipstack usage
+     * @var string $url         Complete url to curl
+     *
+     * @return void.
+     */
+    public function setApiKey(String $key)
+    {
+        $this->apiKey = $key;
+    }
+
+        /**
+     * Set api key
+     *
+     * @var string $ipAddress          IP address to look up
+     * @var string $baseUrl     API base URL
+     * @var string $apiKey      API key for Ipstack usage
+     * @var string $url         Complete url to curl
+     *
+     * @return void.
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
     }
 
     /**

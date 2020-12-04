@@ -4,7 +4,7 @@
  * Get IP address of current user
  */
 
-namespace Olbe19\Geo\Controllers;
+namespace Olbe19\Weather\Models;
 
 /**
  * Get IP of current user

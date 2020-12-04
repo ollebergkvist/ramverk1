@@ -58,7 +58,9 @@ namespace Anax\View;
         <a href="<?= url("ip/json?ip=127.0.0.1") ?>">Valid IPv4 address</a>
     </li>
     <li>
-        <a href="<?= url("ip/json?ip=2001:0db8:0000:0000:0000:ff00:0042:7879") ?>">Valid IPv6 adress</a>
+        <a
+            href="<?= url("ip/json?ip=2001:0db8:0000:0000:0000:ff00:0042:7879") ?>">Valid
+            IPv6 adress</a>
     </li>
     <li>
         <a href="<?= url("ip/json?ip=127.0") ?>">Invalid IP adress</a>

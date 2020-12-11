@@ -1,0 +1,26 @@
+/*!
+ * Stylesheet to be the next version of the stylesheet for dbwebb.se.
+ *
+ * This stylesheet is a look-a-like the dbwebb.se stylesheet and it is
+ * special for the design course. The style is used to show off various
+ * constructions of the website to show how they could be styled.
+ */
+/**
+ * Normalize and reset the style.
+ */
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+th {
+	text-align: left;
+	width: 20%;
+	padding: 1rem;
+}
+
+td {
+	padding: 1rem;
+}

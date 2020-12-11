@@ -69,5 +69,10 @@ return [
             "url" => "api",
             "title" => "API.",
         ],
+        [
+            "text" => "Book",
+            "url" => "book",
+            "title" => "Book.",
+        ],
     ],
 ];

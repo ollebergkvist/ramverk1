@@ -9,7 +9,7 @@ return [
             "active" => false,
             "shared" => true,
             "callback" => function () {
-                $ipvalidator = new \Olbe19\Weather\Models\IpValidator();
+                $ipvalidator = new \Olbe19\Weather\Models\IPValidator();
                 return $ipvalidator;
             },
         ],
